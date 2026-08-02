@@ -1,0 +1,253 @@
+.cell {
+    border: 1px solid #555;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.tic-tac-button {
+    cursor: pointer;
+
+    /*Button*/
+    background-color: rgb(255, 255, 255);
+    width: 100px;
+    height: 100px;
+
+    /*Text*/
+    text-align: center;
+    font-family: Verdana;
+    font-size: 20;
+    font-weight: bold;
+
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 0.1s ease-in-out;
+}
+
+.tic-tac-button:hover {
+    background-color: rgb(182, 182, 182);
+}
+
+.menu-button {
+    cursor: pointer;
+
+    /*Body color*/
+    background-color: rgb(169, 169, 169);
+    color: rgb(255, 0, 0);
+
+    /*Border*/
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: rgb(108, 0, 0);
+
+    /*Sizing*/
+    width: 200px;
+    height: 50px;
+
+    /*Font*/
+    font-weight: bold;
+    font-family: Verdana;
+    font-size: 17;
+
+    /*Transitions*/
+    transition: background-color 0.2s ease-in-out;
+}
+
+.menu-button:hover {
+    background-color: rgb(185, 185, 185);
+}
+
+.icon-button {
+    background-size: 102% 102%;
+    background-repeat: no-repeat;
+
+    cursor: pointer;
+
+    width: 80px;
+    height: 80px;
+
+    background-color: transparent;
+
+    border: none;
+
+}
+
+.icon-button:hover {
+    transform: scale(1.02);
+    transition: 0.25s;
+}
+
+.icon-button:active {
+    outline: none;
+    transform: scale(1.055);
+    transition: 0.35s;
+}
+
+.title-button {
+    background-image: url(./assets/titleCard.png);
+
+    /*Sizing*/
+    width: 490;
+    height: 52;
+
+    border: none;
+    overflow: hidden;
+}
+
+
+.tic-tac-woah-button {
+    cursor: pointer;
+
+    background-image: url(./assets/TicTacWoah.png);
+
+    /*Sizing*/
+    width: 359;
+    height: 192;
+
+    position: relative;
+
+    border: none;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.tic-tac-woah-button::before {
+    content: "";
+
+    background-image: url(./assets/PlayGame.png);
+    background-size: cover;
+    background-position: center;
+
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.tic-tac-woah-button:hover {
+    transform: scaleX(1.03);
+    transition: 0.3s;
+}
+
+.tic-tac-woah-button:hover::before {
+  opacity: 1;
+}
+
+.menu-button:active {
+    font-size: 17.5;
+}
+
+.menu-button-link {
+    text-decoration: none;
+}
+
+.menu-button-link:visited {
+    text-decoration: none;
+    color: currentColor;
+}
+
+
+body {
+    text-align: center;
+    background-color:black;
+}
+
+h1 {
+    /*Font*/
+    font-family: Verdana;
+    font-weight: bold;
+
+    /*Color*/
+    color:rgb(106, 255, 106);
+    -webkit-text-stroke: 2px rgb(0, 124, 35);
+}
+
+h1:hover {
+    -webkit-text-stroke-width: 2.5px;
+}
+
+.blue-text {
+    /*Color*/
+    color:rgb(58, 124, 255);
+    -webkit-text-stroke: 2px rgb(14, 0, 124);
+}
+
+.red-text {
+    /*Color*/
+    color:rgb(255, 58, 58);
+    -webkit-text-stroke: 2px rgb(132, 0, 0);
+}
+
+.purple-text {
+    /*Color*/
+    color:rgb(191, 0, 255);
+    -webkit-text-stroke: 2px rgb(91, 0, 94);
+}
+
+.winner-text {
+    font-size: 50px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+hr {
+    border: none;
+    border-radius: 50px;
+    height: 10px;
+    background-color: rgb(84, 69, 69);
+    width: 60%;
+    margin: 24px auto;
+    background-image: linear-gradient(to right, #dadada, #5a5a5a);
+}
+
+/*Had claude write this bit, I'll sort back through and trim soon*/
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 200px;
+    height: 6px;
+    background: rgb(60, 60, 60);
+    border-radius: 999px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgb(106, 255, 106);
+    box-shadow: 0 0 6px rgb(106, 255, 106);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+input[type="range"]::-moz-range-track {
+    height: 6px;
+    background: rgb(60, 60, 60);
+    border-radius: 999px;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgb(106, 255, 106);
+    box-shadow: 0 0 6px rgb(106, 255, 106);
+    border: none;
+    cursor: pointer;
+}
