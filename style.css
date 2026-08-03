@@ -1,9 +1,14 @@
-.cell {
-    border: 1px solid #555;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
+button, 
+button:active, 
+button:focus,
+button:focus-visible {
+    appearance: none;
+    -webkit-appearance: none;
+    
+    border-style: solid;
+    outline: none;
+    box-shadow: none;
+    transform: none;
 }
 
 .tic-tac-button {
@@ -23,11 +28,17 @@
     justify-content: center;
     align-items: center;
 
-    transition: background-color 0.1s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
+    transition: scale 0.1s ease-in-out;
+}
+
+.tic-tac-button:active {
+    background-color: rgb(220, 220, 220);
+    scale: 0.96;
 }
 
 .tic-tac-button:hover {
-    background-color: rgb(182, 182, 182);
+    background-color: rgb(243, 242, 242);
 }
 
 .menu-button {
@@ -83,6 +94,11 @@
     outline: none;
     transform: scale(1.055);
     transition: 0.35s;
+}
+
+.reset-button {
+    margin-top: 20px;
+    background-image: url(src/assets/restart.png);
 }
 
 .title-button {
@@ -153,17 +169,13 @@
 
 body {
     text-align: center;
-    background-color:black;
+    background-color: black;
 }
 
 h1 {
     /*Font*/
     font-family: Verdana;
     font-weight: bold;
-
-    /*Color*/
-    color:rgb(106, 255, 106);
-    -webkit-text-stroke: 2px rgb(0, 124, 35);
 }
 
 h1:hover {
@@ -184,7 +196,7 @@ h1:hover {
 
 .purple-text {
     /*Color*/
-    color:rgb(191, 0, 255);
+    color:rgb(191, 0, 255) !important;
     -webkit-text-stroke: 2px rgb(91, 0, 94);
 }
 
@@ -201,7 +213,8 @@ h1:hover {
 .game-board {
     display: flex;
     flex-direction: column;
-    gap: 8px
+    gap: 8px;
+    padding-top: 50px;
 }
 
 hr {

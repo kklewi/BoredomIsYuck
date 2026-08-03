@@ -2,6 +2,7 @@
 import { Client } from 'boardgame.io/client';
 import { TicTacToe } from './Game';
 import { GAME_RULES } from './Constants'
+import { reset } from 'boardgame.io/core/';
 
 class TicTacToeClient {
     constructor(rootElement) {
@@ -30,11 +31,26 @@ class TicTacToeClient {
         }
         this.rootElement.classList.add("game-board");
 
+        const resetBar = this.createToolBar();
+
+        this.rootElement.appendChild(resetBar);
+
         const winnerText = document.createElement("h1");
-        winnerText.classList.add(".winner-text");
         winnerText.id = "winner-text";
         winnerText.style.marginBottom = "20px";
         this.rootElement.appendChild(winnerText);
+
+
+    }
+
+    createToolBar() {
+        const resetBar = document.createElement("div");
+        const resetButton = document.createElement("button");
+        resetButton.classList.add("icon-button");
+        resetButton.classList.add("reset-button")
+        resetButton.id = "reset-button";
+        resetBar.appendChild(resetButton);
+        return resetBar;
     }
 
     attachListeners() {
@@ -53,6 +69,20 @@ class TicTacToeClient {
         cells.forEach(cell => {
           cell.onclick = handleCellClick;
         });
+
+        const handleReset = event => {
+            this.client.moves.resetGame();
+            cells.forEach(cell => {
+                cell.innerHTML = '';
+                cell.innerText = '';
+            });
+
+            const winnerMessage = document.getElementById("winner-text");
+            winnerMessage.textContent = '';
+            winnerMessage.className = 'h1';
+        }
+        const resetButton = document.getElementById("reset-button");
+        resetButton.onclick = handleReset;
   }
 
   update(state) {
@@ -67,13 +97,11 @@ class TicTacToeClient {
         const cellValue = state.G.cells[rowID][colID];
 
         if(cellValue !== null) {
-            switch (parseInt(cellValue)) {
-                case 0:
-                    cell.innerHTML = '<h1 class="red-text"> X </h1>';
-                    break;
-                case 1:
-                    cell.innerHTML = '<h1 class="blue-text"> O </h1>';
-                    break;
+            if (cellValue == state.G.playerX) {
+                cell.innerHTML = '<h1 class="red-text"> X </h1>';
+            }
+            else {
+                cell.innerHTML = '<h1 class="blue-text"> O </h1>';
             }
         }
         else {
@@ -81,31 +109,29 @@ class TicTacToeClient {
         }
     });
 
-    const messageEl = document.getElementById("winner-text");
+    const winnerMessage = document.getElementById("winner-text");
 
-    if (state.ctx.gameover) {
-        const isDraw = state.ctx.gameover.winner == undefined;
-
-        if (isDraw) {
-            messageEl.textContent = 'Draw!';
-            messageEl.classList.add("purple-text");
+    if (state.G.gameover) {
+        console.log("gameover")
+        if (state.G.winner == null) {
+            winnerMessage.textContent = 'Draw!';
+            winnerMessage.classList.add("purple-text");
         }
         else {
-            switch(parseInt(state.ctx.gameover.winner)) {
-                case 0:
-                    messageEl.textContent = "X wins!";
-                    messageEl.classList.add("red-text");
-                    break;
-                case 1: 
-                    messageEl.textContent = "O wins!";
-                    messageEl.classList.add("blue-text");
-                    break;
+            if(state.G.winner == state.G.playerX) {
+                winnerMessage.classList.add("red-text");
+                winnerMessage.textContent = "X wins!";
+            }
+            else {
+                winnerMessage.classList.add("blue-text");
+                winnerMessage.textContent = "O wins!";
             }
         }
 
     }
     else {
-        messageEl.textContent = '';
+        winnerMessage.textContent = '';
+        winnerMessage.className = 'h1';
     }
   }
 }

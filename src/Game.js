@@ -5,9 +5,17 @@ const COLS = 3;
 const WIN_CONDITION = 3;
 
 export const TicTacToe = {
-  setup: () => ({ cells: Array.from({length: ROWS}, () =>
-     Array(COLS).fill(null)), currentRow: null, currentCol: null, 
-    turnCount: 0}),
+  setup: ({random, ctx}) => {
+     return {
+      cells: Array.from({length: ROWS}, () => Array(COLS).fill(null)),
+      currentRow: null,
+      currentCol: null,
+      turnCount: 0,
+      playerX: Math.floor(random.Number() * ctx.numPlayers),
+      winner: null,
+      gameover: false,
+  }
+    },
 
   turn: {
     minMoves: 1,
@@ -16,7 +24,7 @@ export const TicTacToe = {
 
   moves: {
     clickCell: ({ G, playerID }, row, col) => {
-        if (G.cells[row][col] !== null) {
+        if (G.cells[row][col] !== null || G.gameover) {
             return INVALID_MOVE;
         }
       
@@ -26,17 +34,24 @@ export const TicTacToe = {
         G.currentCol = col;
 
         G.turnCount++;
-    },
-  },
 
-  endIf: ({ G, ctx }) => {
-    if(G.currentRow !== null) {
         if(isWinner(G.currentRow, G.currentCol, G.cells)) {
-            return { winner: ctx.currentPlayer };
+          G.gameover = true;
+          G.winner = playerID;
         }
-        if (G.turnCount == ROWS * COLS) {
-            return { draw: true };
+        else if(G.turnCount == ROWS * COLS) {
+          G.gameover = true;
         }
+    },
+
+    resetGame: ({ G, ctx, random }) => {
+      G.cells = Array.from({length: ROWS}, () => Array(COLS).fill(null));
+      G.currentRow = null;
+      G.currentCol = null;
+      G.turnCount = 0;
+      G.playerX = Math.floor(random.Number() * ctx.numPlayers);
+      G.winner = null;
+      G.gameover = false;
     }
   },
 };
