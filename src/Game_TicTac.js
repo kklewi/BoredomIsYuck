@@ -1,8 +1,8 @@
 import { INVALID_MOVE } from "boardgame.io/core";
 
-const ROWS = 3;
-const COLS = 3;
-const WIN_CONDITION = 3;
+const ROWS = 4;
+const COLS = 4;
+const WIN_CONDITION = 4;
 
 export const TicTacToe = {
   setup: ({random, ctx}) => {
@@ -13,7 +13,7 @@ export const TicTacToe = {
       turnCount: 0,
       playerX: Math.floor(random.Number() * ctx.numPlayers),
       winner: null,
-      gameover: false,
+      gameover: false
   }
     },
 
@@ -21,37 +21,57 @@ export const TicTacToe = {
     minMoves: 1,
     maxMoves: 1, 
   },
+  phases: {
+    setupPhase: {
+      start: true,
+      next: "playPhase",
 
-  moves: {
-    clickCell: ({ G, playerID }, row, col) => {
-        if (G.cells[row][col] !== null || G.gameover) {
+      moves: {
+        startGame: ({ G, playerID, events }) => {
+          console.log("Player ID: " + playerID);
+          if(!(playerID == 0)) {
             return INVALID_MOVE;
+          }
+          else {
+            events.endPhase();
+          }
         }
-      
-        G.cells[row][col] = playerID;
-
-        G.currentRow = row;
-        G.currentCol = col;
-
-        G.turnCount++;
-
-        if(isWinner(G.currentRow, G.currentCol, G.cells)) {
-          G.gameover = true;
-          G.winner = playerID;
-        }
-        else if(G.turnCount == ROWS * COLS) {
-          G.gameover = true;
-        }
+      }
     },
 
-    resetGame: ({ G, ctx, random }) => {
-      G.cells = Array.from({length: ROWS}, () => Array(COLS).fill(null));
-      G.currentRow = null;
-      G.currentCol = null;
-      G.turnCount = 0;
-      G.playerX = Math.floor(random.Number() * ctx.numPlayers);
-      G.winner = null;
-      G.gameover = false;
+    playPhase: {
+      moves: {
+        clickCell: ({ G, playerID }, row, col) => {
+          if (G.cells[row][col] !== null || G.gameover) {
+            return INVALID_MOVE;
+          }
+      
+          G.cells[row][col] = playerID;
+
+          G.currentRow = row;
+          G.currentCol = col;
+
+          G.turnCount++;
+
+          if(isWinner(G.currentRow, G.currentCol, G.cells)) {
+            G.gameover = true;
+            G.winner = playerID;
+          }
+          else if(G.turnCount == ROWS * COLS) {
+            G.gameover = true;
+          }
+        },
+
+        resetGame: ({ G, ctx, random }) => {
+          G.cells = Array.from({length: ROWS}, () => Array(COLS).fill(null));
+          G.currentRow = null;
+          G.currentCol = null;
+          G.turnCount = 0;
+          G.playerX = Math.floor(random.Number() * ctx.numPlayers);
+          G.winner = null;
+          G.gameover = false;
+        }
+      }
     }
   },
 };
