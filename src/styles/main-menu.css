@@ -1,0 +1,61 @@
+.title-button {
+    background-image: url(../assets/titleCard.png);
+
+    /*Sizing*/
+    width: 490;
+    height: 52;
+
+    border: none;
+    overflow: hidden;
+}
+
+
+.tic-tac-woah-button {
+    cursor: pointer;
+
+    background-image: url(../assets/TicTacWoah.png);
+
+    /*Sizing*/
+    width: 359;
+    height: 192;
+
+    position: relative;
+
+    border: none;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.tic-tac-woah-button::before {
+    content: "";
+
+    background-image: url(../assets/PlayGame.png);
+    background-size: cover;
+    background-position: center;
+
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.tic-tac-woah-button:hover {
+    transform: scaleX(1.03);
+    transition: 0.3s;
+}
+
+.tic-tac-woah-button:hover::before {
+  opacity: 1;
+}
+
+hr {
+    border: none;
+    border-radius: 50px;
+    height: 10px;
+    background-color: rgb(84, 69, 69);
+    width: 60%;
+    margin: 24px auto;
+    background-image: linear-gradient(to right, #dadada, #5a5a5a);
+}

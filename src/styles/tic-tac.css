@@ -1,0 +1,296 @@
+/*-----Rule Menu Styles-----*/
+.rule-body {
+    background: 
+    radial-gradient(ellipse at top,
+     var(--pastel-blue) 0%, var(--pastel-yellow-green) 60%);
+
+    gap: 20px;
+
+
+    min-height: 100vh;
+    margin: 0px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+/*Panel*/
+
+.panel {
+    width: 100%;
+    max-width: 420px;
+
+    padding:28px 26px 22px;
+
+    background: linear-gradient(180deg, var(--panel), var(--panel-accent));
+
+    border: 1px solid var(--panel-edge);
+    border-radius: 14px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 32px 16px;
+}
+
+.panel-head {
+    display: flex;
+    align-items: baseline;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    
+    border-bottom: 1px solid var(--panel-edge);
+}
+
+.panel-head h1 {
+    font-size: 13;
+
+    letter-spacing: 0.14em;
+
+    color: var(--text);
+
+    text-transform: uppercase;
+}
+
+/*Sliders*/
+.slider-wrapper {
+    margin-bottom: 34px;
+}
+
+.slider-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 14px;
+}
+
+.slider-head label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+}
+
+.readout { 
+    font-family: var(--mono);
+    color: var(--blue-accent);
+    background: black;
+    border: 1px solid var(--panel-edge);
+    border-radius: 2px;
+    padding: 2px 8px;
+    min-width: 38px;
+    text-align: center;
+}
+
+.track-wrapper {
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+
+    width: 100%;
+    height: 6px;
+
+    background: linear-gradient(90deg, var(--track), var(--track));
+
+    border: 1px solid var(--track-edge);
+    border-radius: 3px;
+
+    outline-offset: 4px;
+}
+
+/*Edge/Chrome/Safari*/
+input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 30%;
+    border: 2px solid #12131a;
+
+    color: var(--blue-accent);
+
+    cursor: pointer;
+
+    margin-top: -1px;
+}
+
+/*Firefox*/
+input[type="range"]::-moz-range-thumb{
+    width: 18px;
+    height: 18px;
+
+    border-radius: 30%;
+    border: 2px solid #12131a;
+
+    color: var(--blue-accent);
+
+    cursor: pointer;
+
+    margin-top: -1px;
+}
+
+input[type="range"]:focus-visible{
+      /* Draws a visible amber ring so keyboard users can see which slider is focused */
+      outline:2px solid var(--accent);
+}
+
+.ticks{
+    position: relative;
+    height:26px;
+    margin-top:6px;
+}
+
+.tick {
+    position: absolute;
+    top: 0;
+    transform:translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tick-mark {
+    width: 1px;
+    height: 5px;
+    background: var(--track-edge);
+}
+
+.tick-label {
+    margin-top: 4px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: white;
+    white-space: nowrap;
+}
+
+/*-----Game Styles-----*/
+.tool-bar {
+    display: flex;
+    gap: 5px;
+
+    justify-content: center;
+}
+
+/*---Default button styles---*/
+
+button, 
+button:active, 
+button:focus,
+button:focus-visible {
+    appearance: none;
+    -webkit-appearance: none;
+    
+    border-style: solid;
+    outline: none;
+    box-shadow: none;
+    transform: none;
+}
+
+/*---Tic Tac cell styles---*/
+
+.tic-tac-button {
+    cursor: pointer;
+
+    /*Button*/
+    background-color: var(--standard-grey);
+    width: 15vh;
+    height: 15vh;
+
+    border-color: black;
+    border-width: 0.7vh;
+    border-radius: 3px;
+
+    /*Text*/
+    text-align: center;
+    font-family: Verdana;
+    font-size: 5.5vh;
+    font-weight: bold;
+
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+
+    transition: scale 0.1s ease-in-out;
+}
+
+.tic-tac-button:active {
+    background-color: rgb(90, 90, 90);
+    scale: 0.97;
+}
+
+.tic-tac-button:hover {
+    border-color:rgb(255, 112, 112);
+    background-color: rgb(85, 85, 85);
+}
+
+/*---Menu Button Styles---*/
+
+.menu-button {
+    appearance: none;
+
+    font: Verdana;
+    font-size: 13;
+    color: white;
+    font-weight:700;
+
+
+    cursor: pointer;
+    
+    background: linear-gradient(120deg, var(--pastel-red), var(--panel-accent));
+
+    border: solid #12131a;
+    border-width: 2px;
+
+    padding-left: 80px;
+    padding-right: 80px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    border-radius: 14px;
+
+    transition: 0.1s ease-in-out;
+}
+
+.menu-button:active {
+  transform: scale(0.988);
+  background: linear-gradient(90deg, #7ae0ff, var(--panel-accent));
+}
+
+.tic-tac-body {
+    background-image: var(--tic-tac-gradient);
+}
+
+.winner-text {
+    font-size: 50px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 5px;
+
+    padding-bottom: 20px;
+}

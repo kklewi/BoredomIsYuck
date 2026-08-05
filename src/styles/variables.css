@@ -1,0 +1,30 @@
+:root {
+    /*Pastels*/
+    --pastel-green: rgb(114, 255, 126);
+    --pastel-blue: rgb(148, 210, 255);
+    --pastel-yellow: rgb(239, 255, 138);
+    --pastel-red: rgb(255, 94, 94);
+    --pastel-yellow-green: rgb(202, 255, 128);
+    --pastel-purple: rgb(239, 160, 255);
+
+    /*Greys*/
+    --lighter-grey: rgb(90, 90, 90);
+    --standard-grey: rgb(84, 84, 84);
+    --darker-grey: rgb(70, 70, 70);
+    --text:hsl(0, 0%, 22%);
+
+    /*Bright*/
+    --blue-accent:#02abff;
+
+    /*Gradients*/
+    --tic-tac-gradient: linear-gradient(90deg, var(--pastel-blue), var(--panel-edge));
+    --button-gradient: linear-gradient(180deg, var(--standard-grey), rgb(50, 49, 49));
+
+    /*Panel*/
+    --panel:#ff5b5b;
+    --panel-accent: #171a21;
+    --panel-edge:#2a2e39;
+
+    /*Font*/
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

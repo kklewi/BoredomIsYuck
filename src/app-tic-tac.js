@@ -1,24 +1,37 @@
 import { Client } from 'boardgame.io/client';
-import { TicTacToe } from './Game_TicTac';
+import { TicTacToe } from './game-tic-tac';
 
 class TicTacToeClient {
     constructor(rootElement) {
-        this.client = Client({ game: TicTacToe });
+        this.client = Client({ 
+            game: TicTacToe, 
+            debug: false
+        });
         this.client.start();
 
         this.rootElement = rootElement;
 
-        const UI = this.createUI();
-        this.attachListeners();
+        this.rootElement.appendChild(this.createRulesMenu());
+
+        this.attachListenersRuleMenu();
 
         this.client.subscribe(state => this.update(state));
     }
 
-    createUI() {
-        this.rootElement.appendChild(this.createRulesMenu());
+    createGameUI() {
         this.rootElement.appendChild(this.createGrid());
         this.rootElement.appendChild(this.createToolBar());
         this.rootElement.appendChild(this.createWinnerText());
+
+        this.attachListenersGame();
+        
+        const body = document.getElementById('body');
+
+        // Remove the styling for the rules menu
+        body.classList.remove('rule-body');
+
+        // Add the styling for gameplay
+        body.classList.add('tic-tac-body');
     }
 
     /**Helper functions for the UI in order of use */
@@ -29,14 +42,42 @@ class TicTacToeClient {
      * @returns The rules menu object.
      */
     createRulesMenu() {
-        const rulesMenu = document.createElement("div");
+        // Set the styling up for the rules menu
+        document.getElementById('body').classList.add('rule-body');
+
+        const ruleMenu = document.createElement("div");
+        ruleMenu.id = "rule-menu";
+
+        // Add the panel to the menu
+        const panel = document.createElement('div');
+        panel.classList.add('panel');
+        panel.id = 'rule-panel';
+
+        panel.appendChild(this.createPanelHeader());
 
         // Create next phase button
         const createGameButton = this.createMenuButton("create-game-button", "Create Game");
 
-        rulesMenu.appendChild(createGameButton);
+        console.log(createGameButton)
+        ruleMenu.appendChild(panel);
+        ruleMenu.appendChild(createGameButton);
 
-        return rulesMenu;
+        return ruleMenu;
+    }
+
+    createPanelHeader() {
+        // Add panel header
+        const panelHeader = document.createElement('div');
+        panelHeader.id = 'panel-header';
+        panelHeader.classList.add('panel-head');
+        
+        // Add heading text to panel header
+        const panelHeaderText = document.createElement('h1');
+        panelHeaderText.id = 'panel-header-text';
+        panelHeaderText.textContent = 'Tic Tac Rules'
+        panelHeader.appendChild(panelHeaderText);
+
+        return panelHeader;
     }
 
 
@@ -75,6 +116,7 @@ class TicTacToeClient {
 
         // Create reset button
         const resetButton = this.createMenuButton("reset-button", "Reset");
+        //resetButton.style.padding = '2px';
 
         // Create home button
         const homeButton = this.createMenuLinkButton("home-button", "Home", "/index.html");
@@ -82,6 +124,9 @@ class TicTacToeClient {
         // Append buttons
         toolBar.appendChild(resetButton);
         toolBar.appendChild(homeButton);
+
+        toolBar.classList.add('tool-bar');
+
         return toolBar;
     }
 
@@ -101,7 +146,19 @@ class TicTacToeClient {
         return menuButtonWrapper;
     }
 
-    attachListeners() {
+    attachListenersRuleMenu() {
+        const handleStartGame = event => {
+            this.client.moves.startGame();
+            this.createGameUI();
+            this.attachListenersGame();
+            const ruleMenu = document.getElementById('rule-menu');
+            ruleMenu.remove();
+        }
+
+        this.attachListener(handleStartGame, "create-game-button");
+  }
+
+  attachListenersGame() {
         // This event handler will read the cell id from a cell’s
         // `data-id` attribute and make the `clickCell` move.
         const handleCellClick = event => {
@@ -112,11 +169,6 @@ class TicTacToeClient {
 
           this.client.moves.clickCell(rowID, colID);
         };
-        // Attach the event listener to each of the board cells.
-        const cells = this.rootElement.querySelectorAll('.tic-tac-button');
-        cells.forEach(cell => {
-          cell.onclick = handleCellClick;
-        });
 
         const handleReset = event => {
             this.client.moves.resetGame();
@@ -124,24 +176,18 @@ class TicTacToeClient {
                 cell.innerHTML = '';
                 cell.innerText = '';
             });
-
-            const winnerMessage = document.getElementById("winner-text");
-            winnerMessage.textContent = '';
+            const winnerMessage = document.getElementById("title-text");
+            winnerMessage.textContent = 'TIC TAC WOAH';
             winnerMessage.className = 'h1';
+            winnerMessage.classList.add('pastel-yellow');
         }
-
-        const handleStartGame = event => {
-            this.client.moves.startGame();
-        }
-
-
-        console.log(handleReset);
+        // Attach the event listener to each of the board cells.
+        const cells = this.rootElement.querySelectorAll('.tic-tac-button');
+        cells.forEach(cell => {
+          cell.onclick = handleCellClick;
+        });
 
         this.attachListener(handleReset, "reset-button")
-
-        console.log("getting to this point")
-        console.log(typeof(handleStartGame))
-        this.attachListener(handleStartGame, "create-game-button");
   }
   
   /**
@@ -153,6 +199,7 @@ class TicTacToeClient {
   attachListener(handler, id) {
     console.log("Handler: " + handler);
     console.log("ID: "+ id);
+    console.log("button: " + document.getElementById(id));
     const button = document.getElementById(id);
     button.onclick = handler;
   }
@@ -185,29 +232,25 @@ class TicTacToeClient {
                 }
             });
 
-            const winnerMessage = document.getElementById("winner-text");
+            const winnerMessage = document.getElementById("title-text");
 
             if (state.G.gameover) {
-                console.log("gameover")
+                winnerMessage.classList.remove('pastel-yellow');
+                winnerMessage.style.fontSize = '7vh';
                 if (state.G.winner == null) {
                     winnerMessage.textContent = 'Draw!';
-                    winnerMessage.classList.add("purple-text");
+                    winnerMessage.classList.add("pastel-purple");
                 }
                 else {
                     if(state.G.winner == state.G.playerX) {
-                        winnerMessage.classList.add("red-text");
+                        winnerMessage.classList.add("basic-red");
                         winnerMessage.textContent = "X wins!";
                     }
                     else {
-                        winnerMessage.classList.add("blue-text");
+                        winnerMessage.classList.add("basic-blue");
                         winnerMessage.textContent = "O wins!";
                     }
                 }
-
-            }
-            else {
-                winnerMessage.textContent = '';
-                winnerMessage.className = 'h1';
             }
         }
     }

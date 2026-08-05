@@ -1,0 +1,60 @@
+h1 {
+    /*Font*/
+    font-family: Verdana;
+    font-weight: bold;
+}
+
+.blue-text {
+    color:rgb(58, 124, 255);
+    -webkit-text-stroke: 0.5vh rgb(14, 0, 124);
+}
+
+.basic-blue {
+    -webkit-text-stroke: 0.3vh rgb(0, 0, 0);
+    color:rgb(58, 124, 255);
+}
+
+.red-text {
+    color:rgb(255, 58, 58);
+    -webkit-text-stroke: 0.5vh rgb(132, 0, 0);
+}
+
+.basic-red {
+    -webkit-text-stroke: 0.3vh rgb(0, 0, 0);
+    color:rgb(255, 58, 58);
+}
+
+.pastel-red {
+    color: var(--pastel-red);
+    font-size: 6vh;
+}
+
+.pastel-yellow {
+    color: var(--pastel-yellow);
+    font-size: 6vh;
+}
+
+.pastel-purple {
+    color: var(--pastel-purple);
+    font-size: 6vh;
+}
+
+.pastel-blue {
+    color: var(--pastel-blue);
+    font-size: 6vh;
+}
+
+.pastel-green {
+    color: var(--pastel-green);
+}
+
+.purple-text {
+    /*Color*/
+    color:rgb(191, 0, 255);
+    -webkit-text-stroke: 2px rgb(91, 0, 94);
+}
+
+body {
+    text-align: center;
+    background-color: black;
+}

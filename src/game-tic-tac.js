@@ -28,7 +28,6 @@ export const TicTacToe = {
 
       moves: {
         startGame: ({ G, playerID, events }) => {
-          console.log("Player ID: " + playerID);
           if(!(playerID == 0)) {
             return INVALID_MOVE;
           }
