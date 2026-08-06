@@ -10,7 +10,6 @@ h1 {
 }
 
 .basic-blue {
-    -webkit-text-stroke: 0.3vh rgb(0, 0, 0);
     color:rgb(58, 124, 255);
 }
 
@@ -20,7 +19,6 @@ h1 {
 }
 
 .basic-red {
-    -webkit-text-stroke: 0.3vh rgb(0, 0, 0);
     color:rgb(255, 58, 58);
 }
 
@@ -52,9 +50,4 @@ h1 {
     /*Color*/
     color:rgb(191, 0, 255);
     -webkit-text-stroke: 2px rgb(91, 0, 94);
-}
-
-body {
-    text-align: center;
-    background-color: black;
 }

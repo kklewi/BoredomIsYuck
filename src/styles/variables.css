@@ -7,6 +7,8 @@
     --pastel-yellow-green: rgb(202, 255, 128);
     --pastel-purple: rgb(239, 160, 255);
 
+    --pastel-red-dark:rgb(190, 71, 71);
+
     /*Greys*/
     --lighter-grey: rgb(90, 90, 90);
     --standard-grey: rgb(84, 84, 84);
@@ -17,13 +19,19 @@
     --blue-accent:#02abff;
 
     /*Gradients*/
-    --tic-tac-gradient: linear-gradient(90deg, var(--pastel-blue), var(--panel-edge));
+
+    --tic-tac-gradient: radial-gradient(ellipse at top,
+     var(--pastel-blue) 45%, var(--blue-accent) 100%);/*linear-gradient(90deg, var(--pastel-blue), var(--panel-edge)); */
     --button-gradient: linear-gradient(180deg, var(--standard-grey), rgb(50, 49, 49));
 
     /*Panel*/
     --panel:#ff5b5b;
     --panel-accent: #171a21;
     --panel-edge:#2a2e39;
+
+    /*Track*/
+    --track:#323642;
+    --track-edge:#4e5567;
 
     /*Font*/
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;

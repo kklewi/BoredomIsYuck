@@ -1,19 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+/*---Default button styles---*/
+
+button, 
+button:active, 
+button:focus,
+button:focus-visible {
+    appearance: none;
+    -webkit-appearance: none;
+    
+    border-style: solid;
+    outline: none;
+    box-shadow: none;
+    transform: none;
+}
+
 /*-----Rule Menu Styles-----*/
-.rule-body {
+
+#app, #rule-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body {
     background: 
     radial-gradient(ellipse at top,
-     var(--pastel-blue) 0%, var(--pastel-yellow-green) 60%);
+     var(--pastel-blue) 60%, var(--pastel-green) 100%);
 
     gap: 20px;
 
 
     min-height: 100vh;
-    margin: 0px;
+    margin: 0;
 
     display: flex;
     flex-direction: column;
 
     align-items: center;
+    justify-content: center;
+
+
 }
 
 /*Panel*/
@@ -22,18 +52,14 @@
     width: 100%;
     max-width: 420px;
 
-    padding:28px 26px 22px;
+    padding: 28px 26px 22px;
 
     background: linear-gradient(180deg, var(--panel), var(--panel-accent));
 
     border: 1px solid var(--panel-edge);
     border-radius: 14px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding: 32px 16px;
+    margin-bottom: 10px;
 }
 
 .panel-head {
@@ -56,6 +82,8 @@
     color: var(--text);
 
     text-transform: uppercase;
+
+    margin: 0;
 }
 
 /*Sliders*/
@@ -77,10 +105,15 @@
     text-transform: uppercase;
     color: white;
     font-weight: 600;
+    font-family: Verdana;
 }
 
 .readout { 
     font-family: var(--mono);
+
+    font-size: 12;
+    font-weight: bolder;
+
     color: var(--blue-accent);
     background: black;
     border: 1px solid var(--panel-edge);
@@ -91,6 +124,7 @@
 }
 
 .track-wrapper {
+    position: relative;
     height: 20px;
     display: flex;
     align-items: center;
@@ -122,7 +156,7 @@ input[type="range"]::-webkit-slider-thumb{
     border-radius: 30%;
     border: 2px solid #12131a;
 
-    color: var(--blue-accent);
+    background-color: var(--blue-accent);
 
     cursor: pointer;
 
@@ -137,7 +171,7 @@ input[type="range"]::-moz-range-thumb{
     border-radius: 30%;
     border: 2px solid #12131a;
 
-    color: var(--blue-accent);
+    background-color: var(--blue-accent);
 
     cursor: pointer;
 
@@ -146,7 +180,7 @@ input[type="range"]::-moz-range-thumb{
 
 input[type="range"]:focus-visible{
       /* Draws a visible amber ring so keyboard users can see which slider is focused */
-      outline:2px solid var(--accent);
+      outline:2px solid var(--blue-accent);
 }
 
 .ticks{
@@ -186,21 +220,6 @@ input[type="range"]:focus-visible{
     justify-content: center;
 }
 
-/*---Default button styles---*/
-
-button, 
-button:active, 
-button:focus,
-button:focus-visible {
-    appearance: none;
-    -webkit-appearance: none;
-    
-    border-style: solid;
-    outline: none;
-    box-shadow: none;
-    transform: none;
-}
-
 /*---Tic Tac cell styles---*/
 
 .tic-tac-button {
@@ -234,50 +253,77 @@ button:focus-visible {
 }
 
 .tic-tac-button:hover {
-    border-color:rgb(255, 112, 112);
+    border-color: rgb(187, 59, 59);
     background-color: rgb(85, 85, 85);
 }
 
 /*---Menu Button Styles---*/
 
+.submit-button {
+    padding-left: 80px;
+    padding-right: 80px;
+    font-size: 15;
+}
+
+.game-button {
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 30;
+}
+
 .menu-button {
     appearance: none;
 
     font: Verdana;
-    font-size: 13;
+    /* font-size: 13; */
+    font-weight: bolder;
+
     color: white;
     font-weight:700;
 
 
     cursor: pointer;
     
-    background: linear-gradient(120deg, var(--pastel-red), var(--panel-accent));
+    background: 
+    radial-gradient(circle at top,
+     var(--blue-accent) 85%, var(--panel-edge) 80%);
 
-    border: solid #12131a;
-    border-width: 2px;
+    border: none;
 
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-top: 7px;
+    padding-bottom: 7px;
 
-    padding-top: 10px;
-    padding-bottom: 10px;
+    border-radius: 15px;
 
-    border-radius: 14px;
+    border: 3px solid black;
 
     transition: 0.1s ease-in-out;
+
+    text-align: center;
 }
 
 .menu-button:active {
   transform: scale(0.988);
-  background: linear-gradient(90deg, #7ae0ff, var(--panel-accent));
+  background: 
+    radial-gradient(circle at top,
+     var(--blue-accent) 85%, black 85%);
 }
 
 .tic-tac-body {
-    background-image: var(--tic-tac-gradient);
+    background: var(--tic-tac-gradient);
 }
 
-.winner-text {
-    font-size: 50px;
+.top-text {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    height: 50px;
+}
+
+.title-text {
+    color: var(--panel);
+    font-size: 6vh;
+    -webkit-text-stroke: 2px var(--pastel-red);
 }
 
 .row {

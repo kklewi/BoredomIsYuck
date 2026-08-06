@@ -1,15 +1,10 @@
 import { INVALID_MOVE } from "boardgame.io/core";
 
-const ROWS = 4;
-const COLS = 4;
-const WIN_CONDITION = 4;
-
 export const TicTacToe = {
   setup: ({random, ctx}) => {
      return {
-      cells: Array.from({length: ROWS}, () => Array(COLS).fill(null)),
-      currentRow: null,
-      currentCol: null,
+      amountToWin: null,
+      cells: null, // Set when the start game phase begins
       turnCount: 0,
       playerX: Math.floor(random.Number() * ctx.numPlayers),
       winner: null,
@@ -27,12 +22,14 @@ export const TicTacToe = {
       next: "playPhase",
 
       moves: {
-        startGame: ({ G, playerID, events }) => {
+        startGame: ({ G, playerID, events }, rows, cols, winAmount) => {
           if(!(playerID == 0)) {
             return INVALID_MOVE;
           }
           else {
             events.endPhase();
+            G.cells = Array.from({length: rows}, () => Array(cols).fill(null));
+            G.amountToWin = winAmount;
           }
         }
       }
@@ -47,24 +44,19 @@ export const TicTacToe = {
       
           G.cells[row][col] = playerID;
 
-          G.currentRow = row;
-          G.currentCol = col;
-
           G.turnCount++;
 
-          if(isWinner(G.currentRow, G.currentCol, G.cells)) {
+          if(isWinner(row, col, G.cells, G.amountToWin)) {
             G.gameover = true;
             G.winner = playerID;
           }
-          else if(G.turnCount == ROWS * COLS) {
+          else if(G.turnCount == G.cells.length * G.cells[0].length) {
             G.gameover = true;
           }
         },
 
         resetGame: ({ G, ctx, random }) => {
-          G.cells = Array.from({length: ROWS}, () => Array(COLS).fill(null));
-          G.currentRow = null;
-          G.currentCol = null;
+          G.cells = Array.from({length: G.cells.length}, () => Array(G.cells[0].length).fill(null));
           G.turnCount = 0;
           G.playerX = Math.floor(random.Number() * ctx.numPlayers);
           G.winner = null;
@@ -78,12 +70,14 @@ export const TicTacToe = {
 /**
  * Checks if the player that just moved is the winner
  * 
- * @param {*} row - the row placed on
- * @param {*} col - the col placed on
+ * @param {number} row - the row placed on
+ * @param {number} col - the col placed on
+ * @param {*} cells - the state of the cells on the board
+ * @param {number} winCondition 
  * @returns - the boolean state of the player having won
  */
-function isWinner(row, col, cells) {
-    const win = WIN_CONDITION - 1;
+function isWinner(row, col, cells, winCondition) {
+    const win = winCondition - 1;
 
     // Vertical directions
     const top = amountInDirection(row, col, -1, 0, cells); 
@@ -131,9 +125,9 @@ function amountInDirection(row, col, rowDirection, colDirection, cells) {
 /**
  * Checks that a cell is within bounds of the board
  * 
- * @param {*} row - the row of the cell
- * @param {*} col - the col of the cell
- * @returns 
+ * @param {number} row - the row of the cell
+ * @param {number} col - the col of the cell
+ * @returns - the validity of the cell checked
  */
 function isValidCell(row, col, cells) {
     const rowValid = row >= 0 && row < cells.length;
