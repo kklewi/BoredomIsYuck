@@ -22,8 +22,17 @@
 
     --tic-tac-gradient: radial-gradient(ellipse at top,
      var(--pastel-blue) 45%, var(--blue-accent) 100%);/*linear-gradient(90deg, var(--pastel-blue), var(--panel-edge)); */
-    --button-gradient: linear-gradient(180deg, var(--standard-grey), rgb(50, 49, 49));
+    
+     --button-gradient: linear-gradient(180deg, var(--standard-grey), rgb(50, 49, 49));
+    
+    --scoreboard-gradient: radial-gradient(circle at top,
+     var(--darker-grey) 50%, var(--standard-grey) 100%);
 
+    --scoreboard-gradient-red: radial-gradient(circle at top,
+     var(--darker-grey) 50%, var(--pastel-red-dark) 100%);
+
+    --scoreboard-gradient-blue: radial-gradient(circle at top,
+    var(--darker-grey) 50%, var(--blue-accent) 100%);
     /*Panel*/
     --panel:#ff5b5b;
     --panel-accent: #171a21;

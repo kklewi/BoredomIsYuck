@@ -8,7 +8,9 @@ export const TicTacToe = {
       turnCount: 0,
       playerX: Math.floor(random.Number() * ctx.numPlayers),
       winner: null,
-      gameover: false
+      gameover: false,
+      xWins: 0,
+      oWins: 0,
   }
     },
 
@@ -23,7 +25,7 @@ export const TicTacToe = {
 
       moves: {
         startGame: ({ G, playerID, events }, rows, cols, winAmount) => {
-          if(!(playerID == 0)) {
+          if((playerID !== '0')) {
             return INVALID_MOVE;
           }
           else {
@@ -49,6 +51,12 @@ export const TicTacToe = {
           if(isWinner(row, col, G.cells, G.amountToWin)) {
             G.gameover = true;
             G.winner = playerID;
+            if(String(G.playerX) === playerID) {
+              G.xWins++;
+            }
+            else {
+              G.oWins++;
+            }
           }
           else if(G.turnCount == G.cells.length * G.cells[0].length) {
             G.gameover = true;
