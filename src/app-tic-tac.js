@@ -138,6 +138,10 @@ class TicTacToeClient {
         return ruleMenu;
     }
 
+    /**
+     * Creates the header for the rules menu, including text and the panel-head class.
+     * @returns - the object of the rules menu header
+     */
     createPanelHeader() {
         // Add panel header
         const panelHeader = document.createElement('div');
@@ -308,6 +312,8 @@ class TicTacToeClient {
         const percent = (+track.value - +track.min) / (+track.max - +track.min) * 100;
 
         if (track.max === track.min) {
+            // Sets the track to max fullness whenever the min and max are equal because there is not more than one
+            // position to occupy
             track.style.background =
             `linear-gradient(90deg, var(--blue-accent) 0%, var(--blue-accent) 
             100%, var(--track) 100%, var(--track) 100%)`;
@@ -469,6 +475,9 @@ class TicTacToeClient {
 
   }
 
+  /**
+   * Attaches the listeners for the game itself, this step must be done after the game ui has been created.
+   */
   attachListenersGame() {
 
     // This event handler will read the cell id from a cell’s
@@ -525,6 +534,10 @@ class TicTacToeClient {
         }
     }
 
+    /**
+     * Updates the two text elements than contain the scores for the players, and the gradient of the panel based on who is winning.
+     * @param {*} state - the state of the game.
+     */
     updateScoreboard(state) {
         const oScoreText = document.getElementById('o-score');
         const xScoreText = document.getElementById('x-score');
@@ -548,7 +561,10 @@ class TicTacToeClient {
         }
     }
 
-
+    /**
+     * Updates the cells on the board to reflect moves that the players make.
+     * @param {*} state - the state of the game.
+     */
     updateCells(state) {
         const cells = this.rootElement.querySelectorAll('.tic-tac-button');
 
@@ -572,6 +588,11 @@ class TicTacToeClient {
             }
         });
     }
+
+    /**
+     * Updates the state of the game when the game has ended.
+     * @param {*} state - the state of the game.
+     */
     endGameUpdate(state) {
         const winnerMessage = document.getElementById('title-text');
 
@@ -593,6 +614,9 @@ class TicTacToeClient {
         }
     }
 
+    /**
+     * Resets the top text whenver the game is not currently over to display the game title again.
+     */
     resetMessage(){
         const winnerMessage = document.getElementById('title-text');
         winnerMessage.textContent = 'TIC TAC WOAH';

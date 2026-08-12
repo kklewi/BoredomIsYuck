@@ -33,7 +33,6 @@ body {
 
     gap: 20px;
 
-
     min-height: 100vh;
     margin: 0;
 
@@ -51,8 +50,6 @@ body {
 
 .playground-container {
     justify-content: center;
-    /* display: flex;
-    justify-content: center; */
 }
 
 .scoreboard-container {
@@ -221,7 +218,6 @@ input[type="range"]::-moz-range-thumb{
 }
 
 input[type="range"]:focus-visible{
-      /* Draws a visible amber ring so keyboard users can see which slider is focused */
       outline:2px solid var(--blue-accent);
 }
 
